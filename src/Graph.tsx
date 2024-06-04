@@ -46,10 +46,16 @@ class Graph extends Component<IProps, {}> {
     }
     if (this.table) {
       // Load the `table` in the `<perspective-viewer>` DOM reference.
+      // Sets graph as continuous
       elem.setAttribute('view', 'y_line');
+      // Allows us to distinguish between stocks
       elem.setAttribute('column-pivots', '["stock"]');
+      // Allows us to map each dartapoint with a timestamp
       elem.setAttribute('row-pivots', '["timestamp"]')
+      // Allows us to plot only top_ask_price on the y-axis
       elem.setAttribute('columns', '["top_ask_price"]');
+      // Consolidates duplicated data by averaging top_bid_prices and 
+      // top_ask_prices of data points with same name and timestamp
       elem.setAttribute('aggregates', `
         {"stock":"distinct count",
         "top_ask_price":"avg",
